@@ -11,14 +11,15 @@ import com.gtlm.security.domain.UpdateInfo;
 
 public class UpdateInfoParser {
 
+	private static String TAG = "ENGINE_UPDATEINFOPARSER";
 	public static UpdateInfo getUpdateInfo(InputStream is) throws Exception{
 		UpdateInfo info = new UpdateInfo();
 		XmlPullParser xmlPullParser = Xml.newPullParser();
-		Log.d("xml", "xml1::::" + is);
+		Log.d(TAG, "xml1::::" + is);
 		xmlPullParser.setInput(is, "UTF-8");
-		Log.d("xml", "xml::::" + 2);
+		Log.d(TAG, "xml::::" + 2);
 		int type = xmlPullParser.getEventType();
-		Log.d("xml", "xml::::" + 3);
+		Log.d(TAG, "xml::::" + 3);
 		while(type != XmlPullParser.END_DOCUMENT){
 			switch(type){
 			case XmlPullParser.START_TAG:

@@ -22,35 +22,40 @@ public class UpdateInfoService {
 		
 		URL url = new URL(path);
 		HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();//打开一个http链接
-		httpURLConnection.setConnectTimeout(15*1000);//设置链接的超时时间为5秒
+		httpURLConnection.setConnectTimeout(15000);//设置链接的超时时间为15秒
 		httpURLConnection.setRequestMethod("GET");//设置请求的方式
+		
+		//add this, very important
+		//httpURLConnection.setDoInput(true);
+		httpURLConnection.connect();
+		
 		InputStream is = httpURLConnection.getInputStream();//拿到一个输入流。里面包涵了update.xml的信息
 		
 		
-		{//这个是用来测试是否已经读到网络数据
-			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-			byte[] buffer = new byte[1024];
-			int len = 0;
-			while( (len=is.read(buffer)) != -1 ){
-				outStream.write(buffer, 0, len);
-			}
-			is.close();
-			
-			byte[] btImg = outStream.toByteArray();
-			
-			if(null != btImg && btImg.length > 0){
-				Log.d("xmlInfo", "读取到：" + btImg.length + " 字节");
-				String str = "";
-				for(int i = 0; i < btImg.length; i++){
-					str += (char)btImg[i];
-				}
-				Log.d("xmlInfo", "\n\n" + str);
-			}else{
-				Log.d("xmlInfo", "没有从该连接获得内容");
-			}
-		}
-
-		Log.d("xmlInfo", "is:::" + is);
+//		{//这个是用来测试是否已经读到网络数据
+//			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+//			byte[] buffer = new byte[1024];
+//			int len = 0;
+//			while( (len=is.read(buffer)) != -1 ){
+//				outStream.write(buffer, 0, len);
+//			}
+//			is.close();
+//			
+//			byte[] btImg = outStream.toByteArray();
+//			
+//			if(null != btImg && btImg.length > 0){
+//				Log.d("xmlInfo", "读取到：" + btImg.length + " 字节");
+//				String str = "";
+//				for(int i = 0; i < btImg.length; i++){
+//					str += (char)btImg[i];
+//				}
+//				Log.d("xmlInfo", "\n\n" + str);
+//			}else{
+//				Log.d("xmlInfo", "没有从该连接获得内容");
+//			}
+//		}
+//
+//		Log.d("xmlInfo", "is:::" + is);
 		
 
 		return UpdateInfoParser.getUpdateInfo(is);//解析xml

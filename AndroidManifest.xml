@@ -19,7 +19,7 @@
             android:name="com.gtlm.security.MainActivity"
             android:label="@string/app_name" />
         <activity
-            android:name="com.gtlm.security.ui.SplashActivity">
+            android:name="com.gtlm.security.ui.SplashActivity_RunnableHttpurlconnection">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
